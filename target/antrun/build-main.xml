@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="main"  >
+<target name="main">
+  <exec resultproperty="build.result" failonerror="false" executable="/bin/bash">
+    <arg value="-c"/>
+    <arg value="gitbook install &amp;&amp; gitbook build"/>
+  </exec>
+  <condition property="build.check.failed">
+    <not>
+      <equals arg2="0" arg1="${build.result}"/>
+    </not>
+  </condition>
+  <fail message="Gitbook build failed" if="build.check.failed"/>
+</target>
+</project>
